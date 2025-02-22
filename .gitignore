@@ -1,0 +1,8 @@
+*
+!init.sh
+!DockerFile
+!docker-compose.yaml
+!/scripts/
+scripts/*
+!scripts/init.sh
+!README.md
