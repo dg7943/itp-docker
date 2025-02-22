@@ -1,0 +1,6 @@
+# nginx:apline3.21
+FROM nginx:alpine3.21 AS nginx-default
+# use addition context called final-project and copy out the doc folder contents to the default nginx html folder: /usr/share/nginx/html
+# copy recursively the contents of the doc folder to the default nginx html folder
+COPY --from=final-project docs /usr/share/nginx/
+RUN mv /usr/share/nginx/docs /usr/share/nginx/html
