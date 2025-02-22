@@ -1,0 +1,6 @@
+#fp-svc
+#builds your Dockerfile, names the image, adds a context and an additional context Links to an external site. for your git repo (that is used in your Dockerfile) named final-project.
+#name the container
+#expose to localhost on 8081
+#use 2 volumes: 1 for the nginx conf file and 1 for the conf.d folder
+services:
