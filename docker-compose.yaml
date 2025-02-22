@@ -4,3 +4,36 @@
 #expose to localhost on 8081
 #use 2 volumes: 1 for the nginx conf file and 1 for the conf.d folder
 services:
+  fp-svc:
+    build:
+      context: .
+      additional_contexts:
+      # GIT REPO: https://github.com/dg7943/multi-page-site2.git
+        - final-project=https://github.com/dg7943/multi-page-site2.git
+      image: dg7943/final-project-image:docker-compose-build-tag
+      contianer_name: fp-c
+      ports:
+        - 8081:80
+      volumes:
+        - ./volumes/final-project/config/conf.d:etc/nginx/conf.d
+        - ./volumes/final-project/config/nginx.conf:/etc/nginx/nginx.conf
+      depends_on:
+        - hp-svc
+
+    hp-svc:
+      image: nginx:alpine3.21
+      container_name: hp-c
+      volumes:
+        - ./volumes/final-project/config/conf.d:/etc/nginx/conf.d
+        - ./volumes/final-project/config/nginx.conf:/etc/nginx/nginx.conf
+        - ./volumes/final-project/html:/usr/share/nginx/html
+      watchdog-svc:
+        image: alpine:3.21.3
+        container_name: watchdog-c
+        # -it
+        tty: true
+        stdin_open: true
+        restart: unless-stopped
+
+
+
